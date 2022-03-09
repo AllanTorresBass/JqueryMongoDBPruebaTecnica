@@ -1,0 +1,111 @@
+<style>
+
+  body{
+    background-color: rgb(84, 117, 179);
+  }
+  .card{
+    position: relative;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    padding: 2%;
+    margin-left: 25%;
+    width: 40%;
+    border:2px solid rgb(24, 31, 43);
+  }
+  img {
+    width:100%;
+    border-top-left-radius: 3%;
+    border-top-right-radius: 3%;
+  
+  }
+  .respuesta {
+    font-size: 14px;
+    padding: 2%;
+    color:rgb(10, 51, 82);
+    border-bottom: 2px solid rgb(37, 63, 151);
+  }
+  .res_con{
+    
+      background-color: rgb(174, 198, 218);
+  }
+  .input_submit {
+  
+  width:45%;
+  height: 50px;
+ 
+  margin-left: 25%;
+  border-radius: 50px;
+  right: 0px;
+  border: none;
+  font-size: 15px;
+  background-color: #2f74c0;
+  color: white;
+  transition: 0.2s;
+  box-shadow: 0 0 10px black;
+  cursor: pointer;
+}
+.input_submit:hover{
+  background-color: #388ae2;
+}
+.input_submit:active {
+  transform: #388ae2;
+  box-shadow: 0 0 0px black;
+}
+</style>
+<script src="js/jquery-3.6.0.min.js"></script>
+<body>
+<div id="nav"></div>
+ 
+<div id="container">
+  
+</div>
+</body> 
+<script>
+      $("#nav").load('nav.html');
+    //db.micoleccion.find().sort({$natural:-1}).limit(1);
+   
+     console.log(document.location.search.slice(1))
+      var id=document.location.search.slice(1);
+      $(document).ready( function() {
+      
+      $.get("http://localhost:3001/project/findOneProject?id="+id,function(res){
+           console.log(res._id)
+           let x="'"+res._id+"'";
+                $("#formulario").fadeOut("slow");   // Hacemos desaparecer el div "formulario" con un efecto fadeOut lento.
+                if(res){
+                 
+                  return $("#container").html(
+                    `   
+                    <div class="card">
+                      
+                          <div><img  src=${res.img} /></div>
+                            <div class="res_con"> 
+                              <div class="respuesta">Nombre: ${res.name}</div>
+                              <div class="respuesta">Descripción: ${res.description}</div>
+                              <div class="respuesta">Precio: ${res.precio}</div>
+                            </div>  
+                             
+                              <input type="submit" value="Eliminar" class="input_submit" onclick="deleteProject(${x})">
+                          </div>
+                    `)         // Si hemos tenido éxito, hacemos aparecer el div "exito" con un efecto fadeIn lento tras un delay de 0,5 segundos.
+                } else {
+                    $("#cargaexterna").delay(500).fadeIn("slow");    // Si no, lo mismo, pero haremos aparecer el div "fracaso"
+                }
+            });
+          });
+        const deleteProject= (x)=>{
+      
+              $.get("http://localhost:3001/project/deleteProject?id="+x,function(res){
+           console.log(res._id)
+           let x="'"+res._id+"'";
+                $("#formulario").fadeOut("slow");   // Hacemos desaparecer el div "formulario" con un efecto fadeOut lento.
+                if(res){
+                 
+                  return window.location='consulta.html';       
+                } else {
+                  alert("Error eliminando")
+                }
+            });
+        }
+</script>
+    

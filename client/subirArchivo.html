@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketplace</title>
+    <style>
+         body{
+    background-color: rgb(84, 117, 179);
+  }
+  .input{
+    margin-left: 17%;
+  
+    width: 60%;
+    position: relative;
+    align-items: center;
+}
+.input__box{
+    width: 100%;
+    margin-bottom: 7%;
+    border-radius: 50px;
+    padding: 20px 30px;
+    font-size: 25px;
+    border: none;
+    transition: 0.2s;
+    box-shadow: inset 0 0 5px black;
+}
+.input__box:focus{
+    box-shadow: 0 0 10px 1000px rgba(0,0,0,0.5);
+    outline:none;
+}
+.input_submit {
+  
+    width:60%;
+    height: 50px;
+    margin-left: 17%;
+    border-radius: 50px;
+    right: 0px;
+    border: none;
+    font-size: 15px;
+    background-color: #2f74c0;
+    color: white;
+    transition: 0.2s;
+    box-shadow: 0 0 10px black;
+}
+.input_submit:hover{
+    background-color: #388ae2;
+}
+.input_submit:active {
+    transform: #388ae2;
+    box-shadow: 0 0 0px black;
+}
+@media (max-width:700px)
+{
+    .input{
+    margin-left: 8%;
+    width: 60%;
+    position: relative;
+    align-items: center;
+}
+ 
+}
+    </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <form enctype="multipart/form-data" id="formuploadajax" class='input'>
+       
+        <input class='input__box' type="text" name="nombre" id="nombre" required="required" placeholder="Ingrese el nombre"></br>
+               <input class='input__box' type="text" name="descripcion" id="descripcion" required="required" placeholder="Ingrese la descripcion"></br>
+
+                <input class='input__box' placeholder="Ingrese el precio" type="text" name="precio" id="precio" required="required"></br>
+                <input class='input__box' placeholder="Seleccione una imagen" type="file" name="file" required="required" id="file" accept="image/png, image/gif, image/jpeg" /></br>
+            
+ 
+        <br />
+        
+        <input type="submit" class='input_submit' value="Subir archivos"/>
+    </form>
+    <div id="mensaje"></div>
+    
+    
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+  $("#nav").load('nav.html');
+    $(function(){
+        $("#formuploadajax").on("submit", function(e){
+             
+            e.preventDefault();
+            var f = $(this);
+            
+            var formData = new FormData(document.getElementById("formuploadajax"));
+            console.log(formData)
+            formData.append("dato", "valor");
+            //formData.append(f.attr("name"), $(this)[0].files[0]);
+            console.log(formData.append)
+            $.ajax({
+                url: "http://localhost:3001/project/createProject",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+	          processData: false
+            })
+                .done(function(res){
+                    return   window.location="mensaje.html?m=" + res;
+                   $("#mensaje").html("Respuesta: " + res);
+                });
+        });
+    });
+    </script>
+</body>
+</html>
