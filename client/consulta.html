@@ -47,7 +47,51 @@
         
         width:80%;
         text-align: center;
-    }}
+    }
+    @media (max-width:700px)
+{
+  .card{
+        flex-direction: row;
+     
+      border-top-left-radius: 10%;
+      border-top-right-radius: 10%;
+      padding: 1%;
+      margin-left: 7%;
+      width: 25%;
+      border:2px solid rgb(24, 31, 43);
+     margin-bottom: 1%;
+     height: 100%;
+    }
+    img {
+      width:100%;
+      height: 120px;
+      border-top-left-radius: 3%;
+      border-top-right-radius: 3%;
+      cursor: pointer;
+    }
+  }
+  @media (max-width:500px)
+{
+  .card{
+        flex-direction: row;
+     
+      border-top-left-radius: 10%;
+      border-top-right-radius: 10%;
+      padding: 1%;
+      margin-left: 12%;
+      width: 25%;
+      border:2px solid rgb(24, 31, 43);
+     margin-bottom: 1%;
+     height: 100%;
+    }
+    img {
+      width:100%;
+      height: 120px;
+      border-top-left-radius: 3%;
+      border-top-right-radius: 3%;
+      cursor: pointer;
+    }
+  }
   </style>
 <body>
 <div id="nav"></div>
@@ -72,7 +116,7 @@
                     let x ="'"+el._id+"'";
                     return `
                 <div  class="card" onclick="window.location='consultarUno.html?'+${x}">
-                    <div><img width="100" src=${el.img} /></div>
+                    <div><img  src=${el.img} /></div>
                     <div class="res_con"> 
                         <div  class="respuesta">Nombre: ${el.name}</div>
                       

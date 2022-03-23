@@ -1,0 +1,51 @@
+% La idea planteada para la elaboración del proyecto final,
+
+% consiste en el diseño y desarrollo de una pagina web enfocada a ventas (tienda virtual),
+
+%  dándole a todas aquellas personas una nueva alternativa a donde pueda realizar cualquier compra 
+%  de una manera totalmente online. 
+ 
+ El sistema le permitirá a los usuarios registrarse a través de un login, 
+ al mismo tiempo les facilitara el proceso para el registro de los productos que los mismos 
+ deseen colocar a la venta, 
+ por medio de un formulario (compuesto por el nombre, descripción y el precio de venta del producto).
+  Luego de que se halla completado el formulario se encontrara un apartado donde se encontraran 
+  todos los productos que estén a la vente en ese momento, 
+  así como también contara con una sección de comentarios permitiendo la interacción con otros usuarios 
+  que accedan al sistema para aclarar cualquier inquietud del los productos ofertados. 
+
+  Para todo lo antes mencionado se necesita un buen diseño de front end (html, ccs) 
+  para llamar la atención e incentivar a las personas a utilizar el sistema,
+  
+  así como también una base de datos donde se almacenaran todos los datos de los productos ingresados, 
+  para los envíos de los datos del formulario se utilizara el AJAX del jQuery, 
+  a la vez de todo el código en JavaScript para su funcionamiento.
+
+ Feature#1: Login y register
+
+  1) Hacer el login: hacer le formulario de login:
+            1.1) form user:__________ password:____________ link register
+  
+  2) El usuario puede registrarse:
+        2.1) hacer model {'id','Usuario','contraseña'}
+        2.2) hacer la ruta:
+               user.post:/saveUser=> guardar el usuario(solo habra un user admin de la aplicación)
+               user.get:/verifyUser=>verificar si el usuario esta registrado para darle acceso
+                  
+  3) hacer el formulario de registro
+
+  4) si el usuario if (user.type: 'admin'){'ir al Panel admin'} else {'ir Panel Usuario'} 
+_________________________________________________________________________________________________________
+
+Feature#2: Panel del usuario.
+
+  1) hacer el panel del usuario:
+            1.1) debe tener solo la vista de los productos.
+            
+            1.2) Puede agregar textarea para que pueda agregar mensajesajes
+
+  2) hacer model {'id','email','message'}
+  
+  3) hacer rutas para guardar y consultar mensajes:
+            2.1 msg.post:/saveMessage => guardar los mensajes
+            2.2 msg.get/queryMessage =>consultar los mensaje gardados
