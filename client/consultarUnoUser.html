@@ -63,24 +63,33 @@
     border:2px solid rgb(24, 31, 43);
   }
   }
+  #hello_User{
+     color:white;
+  }
+  #hello_User h1{
+    align-items: center;
+    width:290px;
+    border:solid black 2px;
+    border-radius: 10px;
+  }
 </style>
 <script src="js/jquery-3.6.0.min.js"></script>
 <body>
 <div id="nav"></div>
- 
+<div id="hello_User"></div>
 <div id="container">
   
 </div>
 </body> 
 <script>
-   let admin=localStorage.getItem('admin');
-  
-  if(!admin){
+  let userId=localStorage.getItem('userId');
+  let userName=localStorage.getItem('userName');
+  if(!userName){
     alert('Debe iniciar sesion.')
     window.location='index.html'
-    
   }
-      $("#nav").load('nav.html');
+  $("#hello_User").html(`<h1>&nbsp;&nbsp;Bienvenido, ${userName}</h1>`) 
+      $("#nav").load('navUSer.html');
     //db.micoleccion.find().sort({$natural:-1}).limit(1);
    
      console.log(document.location.search.slice(1))
@@ -104,7 +113,7 @@
                               <div class="respuesta">Precio: ${res.precio}</div>
                             </div>  
                              
-                              <input type="submit" value="Eliminar" class="input_submit" onclick="deleteProject(${x})">
+                              <input type="submit" value="atras" class="input_submit" onclick="window.location='consultaUsuario.html'">
                           </div>
                     `)         // Si hemos tenido éxito, hacemos aparecer el div "exito" con un efecto fadeIn lento tras un delay de 0,5 segundos.
                 } else {

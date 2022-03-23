@@ -81,6 +81,13 @@
     
     <script src="js/jquery-3.6.0.min.js"></script>
     <script>
+         let admin=localStorage.getItem('admin');
+  
+  if(!admin){
+    alert('Debe iniciar sesion.')
+    window.location='index.html'
+    
+  }
   $("#nav").load('nav.html');
     $(function(){
         $("#formuploadajax").on("submit", function(e){

@@ -11,7 +11,11 @@
   <title>Marketplace Sebas</title>
   <link rel="stylesheet" media="all" href="style.css" />
 </head>
+
 <body>
+
+  
+  
 <div class="animation">Marketplace SEBAS</div> 
 <div class="animation"> <br/>
   <span>vive una gran experiencia</span>
@@ -25,6 +29,195 @@
      </span>
     </span>
 </span>
-<input type="submit" class='input_submit' value="_  ENTRAR  _" onclick="window.location='consulta.html'"/>
+<section>
+  <a href="#miModal"><button type="submit" class='input_submit_index' value="">_  ENTRAR  _</button></a>
+  <a href="#registrarse"><button type="submit" class='input_submit_index' value="">_  REGISTRARSE  _</button></a>
+</section>
+<section id="miModal" class="modal">
+  <section class="modal-contenido">
+    <a href="#" style="width:10%"><button type="submit" class="X"  value="">X</button></a>
+    <form id="formLogin" class='input'>
+      <table> 
+       <thead>
+           <tr><td><p>Iniciar sesion</p></td></tr>
+       </thead>
+     </table>
+       <input 
+       class='inputLogin__box' 
+       type="text" 
+       name="email" 
+       id="descripcion" 
+       required="required" 
+       placeholder="Ingrese su correo"/>
+     </br>
+     <input 
+       class='inputLogin__box' 
+       type="password" 
+       name="password" 
+       id="descripcion" 
+       required="required" 
+       placeholder="Ingrese su contraseña"/>
+     </br>
+     <button type="submit" class='input_submit' value="">GO</button>
+     </form>
+  </section>  
+</section>
+  
+  <section id="registrarse" class="registro">
+    <section class="modal-Registro">
+      <a href="#" style="width:10%"><button type="submit" class="X"  value="">X</button></a>
+      <section id="containerRegister"></section>
+      <form id="formRegister" class='input'>
+        <table> 
+         <thead>
+             <tr><td><p>Registrarse</p></td></tr>
+         </thead>
+       </table>
+       <input 
+       class='inputLogin__box' 
+       type="text" 
+       name="firstName" 
+       id="descripcion" 
+       required="required" 
+       placeholder="Ingrese su nombre"/>
+     </br>
+     <input 
+         class='inputLogin__box' 
+         type="text" 
+         name="lastName" 
+         id="descripcion" 
+         required="required" 
+         placeholder="Ingrese su apellido"/>
+       </br>
+       <input 
+         class='inputLogin__box' 
+         type="text" 
+         name="email" 
+         id="descripcion" 
+         required="required" 
+         placeholder="Ingrese su correo"/>
+       </br>
+      
+      <input 
+         class='inputLogin__box' 
+         type="password" 
+         name="password" 
+         id="password" 
+         required="required" 
+         placeholder="Ingrese su contraseña"/>
+       </br>
+       <input 
+       class='inputLogin__box' 
+       type="password" 
+       name="veryPassword" 
+       id="veryPassword" 
+       required="required" 
+       placeholder="Verificar contraseña"/>
+     </br>
+     <select id="cars" name="role" class='inputLogin__box' >
+      <option value="user" seleted>user</option>
+      <option value="admin">admin</option>
+      
+   
+    </select>
+     </br>
+     <input type="submit" class='input_submit' value="go" /> 
+       </form>
+    </section>  
+  </section>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script>
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('admin');
+    ///Formulario Registrar
+   
+    $(function(){  
+            $("#formRegister").on("submit", function(e){
+             
+                e.preventDefault();
+                var f = $(this);
+                if(document.getElementById("password").value!=document.getElementById("veryPassword").value){
+                  return alert('Las contraseñas deben ser iguales')
+                }
+                console.log(document.getElementById("password").value)
+                var formData = new FormData(document.getElementById("formRegister"));
+                 
+                formData.append("dato", "valor");
+                 
+             
+                $.ajax({
+                    url: "http://localhost:3001/user/signup",
+                    type: "post",
+                    dataType: "html",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                processData: false
+                })
+                    .done(function(res){
+                      let obj = JSON.parse(res)
+                      console.log(obj.message)
+                      if(obj.message==='ok'){
+                        alert(`El usuario ${obj.user.firstName} se guardo correctamente`)
+                       return window.location='index.html'
+                      }
+                      else{
+                        alert(`ERROR, El usuario ya existe`)
+                      }
+                 
+                       $("#mensaje").html("Respuesta: " + res);
+                    });
+            });
+            $("#formLogin").on("submit", function(e){
+             
+             e.preventDefault();
+             var f = $(this);
+           
+             var formData = new FormData(document.getElementById("formLogin"));
+              
+             formData.append("dato", "valor");
+              
+          
+             $.ajax({
+                 url: "http://localhost:3001/user",
+                 type: "post",
+                 dataType: "html",
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+             processData: false
+             })
+                 .done(function(res){
+                   console.log('Entro')
+                   let obj = JSON.parse(res)
+                   console.log(obj.user)
+                   if(obj.message==='x'){return alert('constraseña incorrecta.')}
+                   if(obj.message==='ok'){
+                    if(obj.user.role==='admin'){
+                      //localStorage.setItem('usuario', obj.user);
+                      localStorage.setItem('admin', obj.user.role);
+                       
+                      return window.location='consulta.html'
+                    }
+                     if(obj.user.role==='user'){
+                      localStorage.setItem('userId', obj.user._id);
+                      localStorage.setItem('userName', obj.user.firstName);
+                       
+                       return window.location='consultaUsuario.html'
+                      }
+                      //return window.location='consulta.html'
+                     
+                   }
+                   else{
+                     alert(`ERROR, El usuario ya existe`)
+                   }
+              
+                  //   $("#mensaje").html("Respuesta: " + res);
+                 });
+         });
+        });
+        //End Formulario registar
+    </script>
 </body>
 </html>

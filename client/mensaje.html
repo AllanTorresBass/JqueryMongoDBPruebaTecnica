@@ -60,6 +60,13 @@
 <div id="container">Aquí se cargará el HTML externo</div>
  
 <script>
+   let admin=localStorage.getItem('admin');
+  
+  if(!admin){
+    alert('Debe iniciar sesion.')
+    window.location='index.html'
+    
+  }
       $("#nav").load('nav.html');
     //db.micoleccion.find().sort({$natural:-1}).limit(1);
     $(document).ready( function() {

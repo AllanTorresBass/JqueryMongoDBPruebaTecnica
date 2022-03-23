@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Pointer-events example</title>
+ <style>
+
+ 
+.sesion{
+ 
+   
+  position:fixed;
+  top:5%;
+  right:0;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+ 
+} 
+ 
+#iniciarSesion:target{
+  opacity:1;
+  pointer-events:auto;
+}
+.registro{
+ 
+   
+ position:fixed;
+ top:5%;
+ right:0;
+ bottom:0;
+ left:0;
+ opacity:0;
+ pointer-events:none;
+
+} 
+
+#registrarse:target{
+ opacity:1;
+ pointer-events:auto;
+}
+
+ </style>
+<body>
+    <section>Bienvenido a nuestro e-commerse SEBAS</section>
+    <a href="#iniciarSesion">Iniciar Sesion</a>
+    
+      <a href="#registrarse">Registrarse</a>
+    <section id="iniciarSesion" class="sesion">
+     
+        <a href="#" style="width:10%"><button type="submit" class="X"  value="">X</button></a>
+        
+
+   <form>
+    <table> 
+     <thead>
+         <tr><td><p>Iniciar sesion</p></td></tr>
+     </thead>
+   </table>
+     <input 
+     class='inputLogin__box' 
+     type="text" 
+     name="descripcion" 
+     id="descripcion" 
+     required="required" 
+     placeholder="Ingrese su correo"/>
+   </br>
+   <input 
+     class='inputLogin__box' 
+     type="password" 
+     name="descripcion" 
+     id="descripcion" 
+     required="required" 
+     placeholder="Ingrese su contraseña"/>
+   </br>
+   </form> 
+     
+    </section>
+        
+        <section id="registrarse" class="registro">
+     
+            <a href="#" style="width:10%"><button type="submit" class="X"  value="">X</button></a>
+            <form>
+                <table> 
+                 <thead>
+                     <tr><td><p>Registrarse</p></td></tr>
+                 </thead>
+               </table>
+                 <input 
+                 class='inputLogin__box' 
+                 type="text" 
+                 name="descripcion" 
+                 id="descripcion" 
+                 required="required" 
+                 placeholder="Ingrese su correo"/>
+               </br>
+               <input 
+                 class='inputLogin__box' 
+                 type="password" 
+                 name="descripcion" 
+                 id="descripcion" 
+                 required="required" 
+                 placeholder="Ingrese su contraseña"/>
+               </br>
+               </form>
+        </section>    
+</body>
+</html>
+
